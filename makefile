@@ -1,4 +1,4 @@
-all: maxi.iso
+all: debiandocker.iso
 example-preseed.txt:
 	curl -O https://www.debian.org/releases/stable/example-preseed.txt
 mini.iso:
@@ -11,7 +11,7 @@ start:
 install:
 	qemu-img create -f qcow2 vm.qcow2 8G
 	kvm -cdrom maxi.iso -hda vm.qcow2 -boot d -net nic -net user -m 256 -localtime -k de
-maxi.iso: mini.iso preseed.cfg
+debiandocker.iso: mini.iso preseed.cfg
 	rm -rf iso
 	mkdir iso
 	bsdtar -C "iso" -xf - <mini.iso
@@ -20,4 +20,4 @@ maxi.iso: mini.iso preseed.cfg
 	echo preseed.cfg | cpio -H newc -o -A -F iso/initrd
 	gzip iso/initrd
 	sed -i -e "s/Install/FORMAT C: and install docker/" iso/txt.cfg
-	genisoimage -r -J -b isolinux.bin -c boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o maxi.iso iso
+	genisoimage -r -J -b isolinux.bin -c boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o debiandocker.iso iso
