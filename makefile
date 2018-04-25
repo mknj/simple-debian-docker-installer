@@ -10,7 +10,7 @@ start:
 	kvm -hda vm.qcow2 -boot c -net nic -net user -m 256 -localtime -k de
 install:
 	qemu-img create -f qcow2 vm.qcow2 8G
-	kvm -cdrom maxi.iso -hda vm.qcow2 -boot d -net nic -net user -m 256 -localtime -k de
+	kvm -cdrom debiandocker.iso -hda vm.qcow2 -boot d -net nic -net user -m 256 -localtime -k de
 debiandocker.iso: mini.iso preseed.cfg
 	rm -rf iso
 	mkdir iso
