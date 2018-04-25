@@ -1,5 +1,4 @@
-all:
-	maxi.iso
+all: maxi.iso
 example-preseed.txt:
 	curl -O https://www.debian.org/releases/stable/example-preseed.txt
 mini.iso:
